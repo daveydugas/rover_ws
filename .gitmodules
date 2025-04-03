@@ -1,3 +1,6 @@
 [submodule "src/odrive_joint_publisher"]
 	path = src/odrive_joint_publisher
 	url = https://github.com/tamu-edu/radlab_odrive_joint_publisher
+[submodule "src/ros_odrive"]
+	path = src/ros_odrive
+	url = https://github.com/odriverobotics/ros_odrive
