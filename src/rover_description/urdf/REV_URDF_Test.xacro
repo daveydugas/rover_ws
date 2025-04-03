@@ -1,0 +1,592 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:macro name="rover_module" params="parent_link tf_prefix=''" >
+      <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="7.14706072102445E-16 -1.13450915328883E-15 0.133292991245626"
+        rpy="0 0 0" />
+      <mass
+        value="1.16420090238786" />
+      <inertia
+        ixx="0.0164887637751647"
+        ixy="-1.90289701316722E-18"
+        ixz="-2.67526886060798E-17"
+        iyy="0.00758057045639267"
+        iyz="-3.44375803085017E-18"
+        izz="0.00955960807272672" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="right_upper_arm_link">
+    <inertial>
+      <origin
+        xyz="8.67361737988404E-16 0.100934490455834 0.0100942927174472"
+        rpy="0 0 0" />
+      <mass
+        value="0.089245113557281" />
+      <inertia
+        ixx="0.00046676622139141"
+        ixy="3.12800290565977E-19"
+        ixz="3.92122715502237E-19"
+        iyy="0.000121199593509576"
+        iyz="4.51709155144065E-05"
+        izz="0.000529188237291866" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/right_upper_arm_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0 0.501960784313725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/right_upper_arm_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_upper_suspension_joint"
+    type="continuous">
+    <origin
+      xyz="0 0.113029999999999 0.200078600000003"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_upper_arm_link" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="right_elbow_link">
+    <inertial>
+      <origin
+        xyz="2.84494650060196E-16 0.0305089500241993 -0.0605771133875825"
+        rpy="0 0 0" />
+      <mass
+        value="0.276177502867985" />
+      <inertia
+        ixx="0.00138370097439145"
+        ixy="4.10713697130028E-18"
+        ixz="1.39962720089084E-18"
+        iyy="0.00118184162619849"
+        iyz="1.67240900157391E-05"
+        izz="0.000604637115743068" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/right_elbow_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/right_elbow_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_elbow_joint"
+    type="continuous">
+    <origin
+      xyz="0 0.228276451582478 -0.0121581928309283"
+      rpy="0 0 0" />
+    <parent
+      link="right_upper_arm_link" />
+    <child
+      link="right_elbow_link" />
+    <axis
+      xyz="1 0 0" />
+    <mimic
+      joint="right_upper_suspension_joint"
+      multiplier="-1"
+      offset="0" />
+  </joint>
+  <link
+    name="right_steer_link">
+    <inertial>
+      <origin
+        xyz="4.00224786206993E-05 0.0556417903494036 -0.0380442173780658"
+        rpy="0 0 0" />
+      <mass
+        value="0.491364303359803" />
+      <inertia
+        ixx="0.00176190750011995"
+        ixy="-2.3086902910516E-08"
+        ixz="5.99035056930559E-07"
+        iyy="0.0021935871105742"
+        iyz="0.000325354991125423"
+        izz="0.00127549915007256" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/right_steer_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/right_steer_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_steer_joint"
+    type="continuous">
+    <origin
+      xyz="0 0.0763523999115025 -0.142620994996874"
+      rpy="0 0 0" />
+    <parent
+      link="right_elbow_link" />
+    <child
+      link="right_steer_link" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="right_drive_link">
+    <inertial>
+      <origin
+        xyz="-4.64947787340297E-07 -0.0485815654607988 -4.94993169632418E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.387386297168039" />
+      <inertia
+        ixx="0.000796364048811902"
+        ixy="-1.99673396528676E-18"
+        ixz="-3.87517573368842E-20"
+        iyy="0.000989327464865147"
+        iyz="-1.94405743453837E-19"
+        izz="0.000796364048811916" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/right_drive_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/right_drive_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_drive_joint"
+    type="continuous">
+    <origin
+      xyz="0 0.1732788005332 -0.0550671980221146"
+      rpy="0 0 0" />
+    <parent
+      link="right_steer_link" />
+    <child
+      link="right_drive_link" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="right_lower_arm_link">
+    <inertial>
+      <origin
+        xyz="5.82867087928207E-16 0.0916466964707608 -0.00210508223009852"
+        rpy="0 0 0" />
+      <mass
+        value="0.0901506877798632" />
+      <inertia
+        ixx="0.000709947389465217"
+        ixy="-1.8090258729004E-19"
+        ixz="1.29265966493677E-19"
+        iyy="8.29725439825146E-05"
+        iyz="-1.14668119266734E-05"
+        izz="0.000732993154194516" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/right_lower_arm_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.341176470588235 0.83921568627451 0.411764705882353 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/right_lower_arm_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_lower_suspension_joint"
+    type="continuous">
+    <origin
+      xyz="0 0.0685799999999988 0.111178600000003"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="right_lower_arm_link" />
+    <axis
+      xyz="-1 0 0" />
+    <mimic
+      joint="right_upper_suspension_joint"
+      multiplier="-1"
+      offset="0" />
+  </joint>
+  <link
+    name="left_upper_arm_link">
+    <inertial>
+      <origin
+        xyz="1.19348975147204E-15 -0.09566388473219 0.0337355490097695"
+        rpy="0 0 0" />
+      <mass
+        value="0.089245113557281" />
+      <inertia
+        ixx="0.000466766221391411"
+        ixy="7.2798747442127E-19"
+        ixz="5.82302453068405E-19"
+        iyy="0.000123323201524777"
+        iyz="5.38730902348708E-05"
+        izz="0.000527064629276666" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/left_upper_arm_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0 0.501960784313725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/left_upper_arm_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_upper_suspension_joint"
+    type="continuous">
+    <origin
+      xyz="0 -0.113030000000001 0.200078600000003"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_upper_arm_link" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="left_elbow_link">
+    <inertial>
+      <origin
+        xyz="1.38777878078145E-16 -0.0305089494916406 -0.0605771233835763"
+        rpy="0 0 0" />
+      <mass
+        value="0.276177502867984" />
+      <inertia
+        ixx="0.00138370097439145"
+        ixy="1.62464807955631E-18"
+        ixz="-6.28782801486317E-18"
+        iyy="0.00118184162619849"
+        iyz="-1.67240900157383E-05"
+        izz="0.000604637115743068" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/left_elbow_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/left_elbow_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_elbow_joint"
+    type="continuous">
+    <origin
+      xyz="0 -0.224651005898425 0.0423070389985593"
+      rpy="0 0 0" />
+    <parent
+      link="left_upper_arm_link" />
+    <child
+      link="left_elbow_link" />
+    <axis
+      xyz="1 0 0" />
+    <mimic
+      joint="left_upper_suspension_joint"
+      multiplier="-1"
+      offset="0" />
+  </joint>
+  <link
+    name="left_steer_link">
+    <inertial>
+      <origin
+        xyz="-3.78479948679109E-05 -0.050860797138137 -0.0340889001493224"
+        rpy="0 0 0" />
+      <mass
+        value="0.405984022646422" />
+      <inertia
+        ixx="0.00172438585657842"
+        ixy="-2.30866912290617E-08"
+        ixz="-6.62312988707159E-07"
+        iyy="0.00196766144893258"
+        iyz="-0.000325354993938091"
+        izz="0.00102637403801297" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/left_steer_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/left_steer_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_steer_joint"
+    type="continuous">
+    <origin
+      xyz="0 -0.0763524002710016 -0.142620999999998"
+      rpy="0 0 0" />
+    <parent
+      link="left_elbow_link" />
+    <child
+      link="left_steer_link" />
+    <axis
+      xyz="0 0 -1" />
+  </joint>
+  <link
+    name="left_drive_link">
+    <inertial>
+      <origin
+        xyz="2.17669443393353E-07 0.0485815658150146 -4.9843936285314E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.387386297168039" />
+      <inertia
+        ixx="0.000796364048811911"
+        ixy="6.39761624733332E-18"
+        ixz="-4.03881105815611E-18"
+        iyy="0.000989327464865172"
+        iyz="3.10095615483234E-18"
+        izz="0.000796364048811931" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/left_drive_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/left_drive_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_drive_joint"
+    type="continuous">
+    <origin
+      xyz="0 -0.173278799729241 -0.055067200000181"
+      rpy="0 0 0" />
+    <parent
+      link="left_steer_link" />
+    <child
+      link="left_drive_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="left_lower_arm_link">
+    <inertial>
+      <origin
+        xyz="6.24500451351651E-16 -0.0895330380591021 0.019682058863483"
+        rpy="0 0 0" />
+      <mass
+        value="0.0901506877798632" />
+      <inertia
+        ixx="0.000709947389465217"
+        ixy="1.14740856478234E-18"
+        ixz="-8.52223760834534E-20"
+        iyy="0.000124788606463752"
+        iyz="0.00015988810820397"
+        izz="0.00069117709171328" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/left_lower_arm_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.341176470588235 0.83921568627451 0.411764705882353 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://rover_description/meshes/left_lower_arm_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="left_lower_suspension_joint"
+    type="continuous">
+    <origin
+      xyz="0 -0.06858 0.11118"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="left_lower_arm_link" />
+    <axis
+      xyz="1 0 0" />
+    <mimic
+      joint="left_upper_suspension_joint"
+      multiplier="1"
+      offset="0" />
+  </joint>
+  </xacro:macro>
+
+</robot>

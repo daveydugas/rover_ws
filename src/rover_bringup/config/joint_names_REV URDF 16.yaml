@@ -1,0 +1,1 @@
+controller_joint_names: ['', 'right_upper_suspension_joint', 'right_elbow_joint', 'right_steer_joint', 'right_drive_joint', 'right_lower_suspension_joint', 'left_upper_suspension_joint', 'left_elbow_joint', 'left_steer_joint', 'left_drive_joint', 'left_lower_suspension_joint', ]

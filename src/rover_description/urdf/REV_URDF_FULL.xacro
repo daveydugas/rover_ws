@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="REV">
+    
+    <!-- Include the other URDF/Xacro file -->
+    <xacro:include filename="$(find rover_description)/urdf/REV_URDF_V2.xacro"/>
+
+    <!-- Define the links -->
+    <link name="base_link"/>
+    <link name="front_link"/>
+    <link name="middle_link"/>
+    <link name="rear_link"/>
+
+    <!-- Define the joints -->
+    <joint name="front_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="front_link"/>
+        <origin xyz="0.496 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="middle_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="middle_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="rear_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="rear_link"/>
+        <origin xyz="-0.496 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Include rover modules with different prefixes -->
+    <xacro:rover_module parent_link="front_link" tf_prefix="front" right_upper_suspension_x='-1' left_upper_suspension_x='-1'
+    right_elbow_multiplier='-1' right_lower_suspension_multiplier='1' left_elbow_multiplier='-1' left_lower_suspension_multiplier='1'/>
+    <xacro:rover_module parent_link="middle_link" tf_prefix="middle" right_upper_suspension_x='1' left_upper_suspension_x='1'
+    right_elbow_multiplier='1' right_lower_suspension_multiplier='-1' left_elbow_multiplier='1' left_lower_suspension_multiplier='-1'/>
+    <xacro:rover_module parent_link="rear_link" tf_prefix="rear" right_upper_suspension_x='1' left_upper_suspension_x='1'
+    right_elbow_multiplier='1' right_lower_suspension_multiplier='-1' left_elbow_multiplier='1' left_lower_suspension_multiplier='-1'/>
+</robot>
