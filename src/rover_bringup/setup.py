@@ -24,7 +24,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'send_service_call = rover_bringup.send_service_call:main'
+            'send_service_call = rover_bringup.send_service_call:main',
+            'demo_node = rover_bringup.demo_node:main'
         ],
     },
 )

@@ -46,7 +46,7 @@ def generate_launch_description():
         package='odrive_can',
         executable='odrive_can_node',
         name='suspension_12_node',
-        namespace='front_right_upper_suspension_12', #potential problem!!!!!
+        namespace='front_right_upper_suspension_12',
         parameters=[{
             'node_id': 12,
             'interface': 'can1'}]
