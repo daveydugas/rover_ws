@@ -32,8 +32,10 @@
     <!-- Include rover modules with different prefixes -->
     <xacro:rover_module parent_link="front_link" tf_prefix="front" right_upper_suspension_x='-1' left_upper_suspension_x='-1'
     right_elbow_multiplier='-1' right_lower_suspension_multiplier='1' left_elbow_multiplier='-1' left_lower_suspension_multiplier='1'/>
+
     <xacro:rover_module parent_link="middle_link" tf_prefix="middle" right_upper_suspension_x='1' left_upper_suspension_x='1'
     right_elbow_multiplier='1' right_lower_suspension_multiplier='-1' left_elbow_multiplier='1' left_lower_suspension_multiplier='-1'/>
+
     <xacro:rover_module parent_link="rear_link" tf_prefix="rear" right_upper_suspension_x='1' left_upper_suspension_x='1'
     right_elbow_multiplier='1' right_lower_suspension_multiplier='-1' left_elbow_multiplier='1' left_lower_suspension_multiplier='-1'/>
 </robot>

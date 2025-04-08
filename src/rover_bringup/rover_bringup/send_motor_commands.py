@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 
-from std_msgs.msg import Float32MultiArray, Float32
+from std_msgs.msg import Float32MultiArray
 from odrive_can.msg import ControlMessage
 
 class SendMotorCommands(Node):
@@ -28,7 +28,7 @@ class SendMotorCommands(Node):
             "middle_left_drive_43/control_message",
             "rear_right_upper_suspension_16/control_message",
             "rear_left_upper_suspension_15/control_message",
-            "rear_right_steer_26/ccontrol_message",
+            "rear_right_steer_26/control_message",
             "rear_left_steer_25/control_message",
             "rear_right_drive_36/control_message",
             "rear_right_drive_46/control_message",
@@ -37,7 +37,7 @@ class SendMotorCommands(Node):
         ]
 
         #create a publisher for each topic in the list
-        self.publishers = [self.create_publisher(ControlMessage, name, 10) for name in self.topic_names]
+        self.publisher_ = [self.create_publisher(ControlMessage, name, 10) for name in self.topic_names]
         
         #create a subscriber to sarahs topic containing the commands
         self.create_subscription(Float32MultiArray, 'sarahs_topic', self.callback, 10)
@@ -60,10 +60,10 @@ class SendMotorCommands(Node):
             msg_drive = ControlMessage(control_mode=2, input_mode=1, input_pos=0.0, input_vel=drive, input_torque=0.0) #control mode 2 for velcity
 
             #publish each value to the i-th topic in the topic_names array
-            self.publishers[i * 4 + 0].publish(msg_suspension)
-            self.publishers[i * 4 + 1].publish(msg_steer)
-            self.publishers[i * 4 + 2].publish(msg_drive)
-            self.publishers[i * 4 + 3].publish(msg_drive)
+            self.publisher_[i * 4 + 0].publish(msg_suspension)
+            self.publisher_[i * 4 + 1].publish(msg_steer)
+            self.publisher_[i * 4 + 2].publish(msg_drive)
+            self.publisher_[i * 4 + 3].publish(msg_drive)
 
 def main(args=None):
     rclpy.init(args=args)

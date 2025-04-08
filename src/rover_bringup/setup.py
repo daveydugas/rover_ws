@@ -25,7 +25,10 @@ setup(
     entry_points={
         'console_scripts': [
             'send_service_call = rover_bringup.send_service_call:main',
-            'demo_node = rover_bringup.demo_node:main'
+            'demo_node = rover_bringup.demo_node:main',
+            'send_motor_commands = rover_bringup.send_motor_commands:main',
+            'dummy_publisher = rover_bringup.dummy_publisher:main',
+            'take_me_home = rover_bringup.take_me_home:main'
         ],
     },
 )
