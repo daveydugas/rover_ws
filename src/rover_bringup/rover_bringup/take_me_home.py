@@ -51,14 +51,14 @@ class TakeRoverHome(Node):
             self.create_subscription(ControllerStatus, topic, self.make_status_callback(name), 10)
         
         #start homing procedure every 5 seconds
-        self.create_timer(5.0, self.start_homing)
+        self.homing_timer = self.create_timer(5.0, self.start_homing)
 
-    def joint_state_callback(self, msg):
-        name = msg.name  # or however you're getting joint name
-        position = msg.position
+    # def joint_state_callback(self, msg):
+    #     name = msg.name
+    #     position = msg.position
 
-        self.current_positions[name] = position
-        self.get_logger().info(f"Updated position for joint: {name}")
+    #     self.current_positions[name] = position
+    #     self.get_logger().info(f"Updated position for joint: {name}")
 
     #callback to store current positions associated with each joint
     def make_status_callback(self, name):
@@ -72,11 +72,14 @@ class TakeRoverHome(Node):
         total_joints = len(self.joint_names)
         self.get_logger().info(f"Received {current_len} / {total_joints} joint positions")
         self.get_logger().info(f"Current joints received: {list(self.current_positions.keys())}")
+        sleep(5.0)
+        for name in self.joint_names:
+            if name not in self.publishers_:
+                self.get_logger().warn(f"No publisher found for {name}")
 
         if len(self.current_positions) < len(self.joint_names):
             self.get_logger().warn("Not all positions received yet, waiting...")
-            self.create_timer(0.5, self.start_homing)
-            return
+            return  # just wait for next timer tick or let external trigger retry
 
         self.get_logger().info("Starting to home all joints...")
 
@@ -98,7 +101,9 @@ class TakeRoverHome(Node):
             sleep(0.03)
 
         self.get_logger().info("Homing complete")
+        sleep(15.0)
         self.homing_complete = True
+        self.homing_timer.cancel()
 
     #meanwhile this is running every 0.1 seconds and checking if homing_complete changes to True
     def check_homing_done(self):

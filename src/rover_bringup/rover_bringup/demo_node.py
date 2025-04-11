@@ -17,8 +17,6 @@ class DemoPublisher(Node):
 
         self.get_logger().info("Demo node started. Waiting for homing to complete...")
 
-        self.timer = self.create_timer(0.1, self.run_demo)
-
         self.front_right_upper_suspension_publisher = self.create_publisher(ControlMessage, '/front_right_upper_suspension_12/control_message', 10) 
         self.front_left_upper_suspension_publisher = self.create_publisher(ControlMessage, '/front_left_upper_suspension_11/control_message', 10) 
 
@@ -133,7 +131,7 @@ class DemoPublisher(Node):
         msg.input_pos = -0.05 * math.sin(self.front_time + math.pi/2)
         msg.input_vel = 0.0
         msg.input_torque = 0.0
-        self.rear_right_upper_suspension_publisher.publish(msg)
+        #self.rear_right_upper_suspension_publisher.publish(msg)
 
     def middle_right_upper_suspension_callback(self):
         if not self.homed:
@@ -150,6 +148,7 @@ class DemoPublisher(Node):
     def steer_callback(self):
         if not self.homed:
             return
+        self.get_logger().info("Sending steer commands")
         self.steer_time += 0.05
         msg=ControlMessage()
         msg.control_mode = 3
@@ -161,7 +160,7 @@ class DemoPublisher(Node):
         self.front_left_steer_publisher.publish(msg)
         self.middle_right_steer_publisher.publish(msg)
         self.middle_left_steer_publisher.publish(msg)
-        self.rear_right_steer_publisher.publish(msg)
+        #self.rear_right_steer_publisher.publish(msg)
         self.rear_left_steer_publisher.publish(msg)
     
     def drive_callback(self):
