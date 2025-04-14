@@ -34,5 +34,5 @@ ros2 run rover_bringup demo_node
 Then, in another terminal run
 ```
 ros2 run rover_bringup take_me_home
-
+```
 This will bring all of the joints to zero first and then run a demo movement of all of the joints
