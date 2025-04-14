@@ -8,13 +8,13 @@ cd rover_ws
 colcon build
 source install/local_setup.bash
 ```
-##Prepare for launch
-###Plug in the Steer and Drive Axises to your left most USB port and in any terminal run
+## Prepare for launch
+### Plug in the Steer and Drive Axises to your left most USB port and in any terminal run
 ```
 sudo ip link set can0 up type can bitrate 1000000
 ```
 
-###Plug in the Suspension Axises to your right most USB port and in any terminal run
+### Plug in the Suspension Axises to your right most USB port and in any terminal run
 ```
 sudo ip link set can1 up type can bitrate 1000000
 ```
