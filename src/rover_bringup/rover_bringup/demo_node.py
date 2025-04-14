@@ -80,7 +80,7 @@ class DemoPublisher(Node):
         msg=ControlMessage()
         msg.control_mode = 3
         msg.input_mode = 1
-        msg.input_pos = -0.05 * math.sin(self.front_time + 0)
+        msg.input_pos = -0.05 * math.sin(self.front_time + math.pi/2)
         msg.input_vel = 0.0
         msg.input_torque = 0.0
         self.front_right_upper_suspension_publisher.publish(msg)
@@ -128,7 +128,7 @@ class DemoPublisher(Node):
         msg=ControlMessage()
         msg.control_mode = 3
         msg.input_mode = 1
-        msg.input_pos = 0.05 * math.sin(self.front_time + math.pi/2)
+        msg.input_pos = 0.05 * math.sin(self.front_time - math.pi/2)
         msg.input_vel = 0.0
         msg.input_torque = 0.0
         self.rear_right_upper_suspension_publisher.publish(msg)
@@ -140,7 +140,7 @@ class DemoPublisher(Node):
         msg=ControlMessage()
         msg.control_mode = 3
         msg.input_mode = 1
-        msg.input_pos = 0.05 * math.sin(self.front_time + math.pi)
+        msg.input_pos = 0.05 * math.sin(self.front_time + 0)
         msg.input_vel = 0.0
         msg.input_torque = 0.0
         self.middle_right_upper_suspension_publisher.publish(msg)
